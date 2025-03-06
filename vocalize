@@ -1,0 +1,26 @@
+#!/bin/python3
+
+import os
+from time import sleep
+import sys
+
+VOICE_NAME = "en-US-AndrewNeural"
+
+def main():
+    if len(sys.argv) != 2:
+        print("usage: vocalize <file_to_vocalize>")
+        exit(1)
+    filename_to_vocalize = sys.argv[1]
+
+    with open(filename_to_vocalize, 'r') as file_to_vocalize:
+
+        # create mp3 for repeated listening
+        os.system(f"edge-playback --file {filename_to_vocalize} --voice {VOICE_NAME} --write-media {filename_to_vocalize}.mp3 > /dev/null 2>&1")
+        
+        # go line by line for immediate playback
+        for line in file_to_vocalize:
+            print(line.strip('\n'))
+            os.system(f"edge-playback --text \"{line}\" --voice {VOICE_NAME} > /dev/null 2>&1")
+
+if __name__ == "__main__":
+    main()
