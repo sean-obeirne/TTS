@@ -6,9 +6,15 @@ import sys
 
 
 def list_options(dir_list, prompt):
+    print(dir_list)
     files = os.listdir(dir_list)
     for i, file in enumerate(files):
-        print(f"{i+1}: {file}")
+        this_path = f"{dir_list}{file}"
+        if os.path.isfile(this_path):
+            size = os.path.getsize(this_path) / (1024 * 1024)
+            print(f"{i+1}: {file} - {size:.2f} MB")
+        else:
+            print(f"{i+1}: {file}")
 
     print("-" * (max([len(file) for file in files]) + 5))
 
