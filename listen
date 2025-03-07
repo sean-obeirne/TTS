@@ -1,0 +1,53 @@
+#!/bin/python3
+
+import os
+from time import sleep
+import sys
+
+
+def list_options(dir_list, prompt):
+    files = os.listdir(dir_list)
+    for i, file in enumerate(files):
+        print(f"{i+1}: {file}")
+
+    print("-" * (max([len(file) for file in files]) + 5))
+
+    return files[int(input(prompt)) - 1]
+
+
+def main():
+
+    # Define Storage
+    listen_dir = "/home/sean/revature/audio-archive/storage/"
+
+    num_args = len(sys.argv)
+
+    # Week
+    if num_args > 1:
+        week = sys.argv[1]
+    else:
+        week = list_options(listen_dir, "Week to open: ")
+        print()
+    listen_dir += f"{week}/"
+    # print(listen_dir)
+
+    # Day
+    if num_args > 2:
+        day = sys.argv[2]
+    else:
+        day = list_options(listen_dir, "Day to open: ")
+        print()
+    listen_dir += f"{day}/"
+    # print(listen_dir)
+
+    # Audio Track
+    audio = list_options(listen_dir, "Lesson to listen to: ")
+    listen_dir += f"{audio}"
+    # print(listen_dir)
+    print(f"\n  Now playing {audio}\n")
+
+    os.system(f"mpv -ao=pulse {listen_dir}")
+
+
+if __name__ == "__main__":
+    main()
