@@ -1,0 +1,22 @@
+#!/bin/python3
+
+import os
+import sys
+
+
+def main():
+
+    # Define Storage
+    text_dir = "/home/sean/revature/text-archive/"
+
+    num_args = len(sys.argv)
+
+    # Week
+    if num_args != 1:
+        print("Creating file...")
+        os.system(f"xsel --clipboard --output > {sys.argv[1]}")
+    else:
+        print("usage: create-text <new filename>")
+
+if __name__ == "__main__":
+    main()
