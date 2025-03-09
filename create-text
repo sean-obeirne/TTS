@@ -14,7 +14,7 @@ def main():
     # Week
     if num_args != 1:
         print("Creating file...")
-        os.system(f"xsel --clipboard --output > {sys.argv[1]}")
+        os.system(f"xsel --clipboard --output > {text_dir}{sys.argv[1]}")
     else:
         print("usage: create-text <new filename>")
 
